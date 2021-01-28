@@ -25,7 +25,11 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 
-app.get('/empresa', controller.findAll);
+app.get('/empresa', controller.getAll);
+app.get('/empresa/:cuit', controller.getOne);
+app.get('/empresa', controller.create);
+app.get('/empresa', controller.update);
+app.get('/empresa/:cuit', controller.delete);
 
 // routes
 // app.use(empresaRouter.findAll, function(err: any, req: any, res: any, next: any){

@@ -3,25 +3,50 @@ import { EmpresaService } from '../services/Empresa.service';
 
 export class EmpresaRouter{
     constructor(private empresaService: EmpresaService){        
-        this.findAll = this.findAll.bind(this);
+        this.getAll = this.getAll.bind(this);
+        this.getOne = this.getOne.bind(this);
+        this.create = this.create.bind(this);
+        this.update = this.update.bind(this);
+        this.delete = this.delete.bind(this);
 
     }
 
-    public findAll(req: Request, res: Response, next: NextFunction){
+    public getAll(req: Request, res: Response, next: NextFunction){
         (async () => {
-            const emp = await this.empresaService.findAll()
+            const emp = await this.empresaService.getAll();
             return res.json(emp);
 
         })().catch(next);
     }
 
+    public getOne(req: Request, res: Response, next: NextFunction){
+        (async () => {
+            return await this.empresaService.getOne(req.params.Cuit);            
 
+        })().catch(next);
+    }
+
+    public create(req: Request, res: Response, next: NextFunction){
+        (async () => {
+            return await this.empresaService.create(req.body);
+
+        })().catch(next);
+
+    }
+
+    public update(req: Request, res: Response, next: NextFunction){
+        (async () => {
+            return await this.empresaService.update(req.body);
+
+        })().catch(next);
+
+    }
+
+    public delete(req: Request, res: Response, next: NextFunction){
+        (async () => {
+            return await this.empresaService.delete(req.params.Cuit);
+
+        })().catch(next);
+
+    }
 }
-
-// router.get('/empresa', getEmpresas);
-// router.post('/empresa', createEmpresa);
-// router.get('/empresa/:cuit', getEmpresa);
-// router.put('/empresa', updateEmpresa);
-// router.delete('/empresa/:cuit', deleteEmpresa);
-
-// export default router
