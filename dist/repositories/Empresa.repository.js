@@ -14,13 +14,12 @@ var EmpresaRepository = /** @class */ (function () {
         //     .from(Empresa, "empresa").getMany();
         return typeorm_1.getRepository(Empresa_1.Empresa).find();
     };
+    EmpresaRepository.prototype.getEmpresa = function (cuit) {
+        var empresa = typeorm_1.getRepository(Empresa_1.Empresa).findOne(cuit);
+    };
     return EmpresaRepository;
 }());
 exports.EmpresaRepository = EmpresaRepository;
-// export const getEmpresas = async (req: Request, res: Response): Promise<Response> => {
-//     const empresas = await getRepository(Empresa).find();   
-//     return res.json(empresas);
-// }
 // export const getEmpresa = async (req: Request, res: Response): Promise<Response> => {
 //     try {
 //         const empresa = await getRepository(Empresa).findOne(req.params.cuit);

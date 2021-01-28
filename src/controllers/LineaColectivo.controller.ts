@@ -1,7 +1,7 @@
 import { Router } from 'express'
 const router = Router()
 
-import { getLineaColectivo, getLineaColectivos, createLineaColectivo, updateLineaColectivo, deleteLineaColectivo } from '../controller/LineaColectivo.controller'
+import { getLineaColectivo, getLineaColectivos, createLineaColectivo, updateLineaColectivo, deleteLineaColectivo } from '../repositories/LineaColectivo.repository'
 
 router.get('/lineaColectivo', getLineaColectivos);
 router.get('/lineaColectivo/:id', getLineaColectivo);

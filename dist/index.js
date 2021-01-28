@@ -8,60 +8,27 @@ var express_1 = __importDefault(require("express"));
 var morgan_1 = __importDefault(require("morgan"));
 var cors_1 = __importDefault(require("cors"));
 var typeorm_1 = require("typeorm");
-var Empresa_route_1 = __importDefault(require("./routes/Empresa.route"));
-var LineaColectivo_router_1 = __importDefault(require("./routes/LineaColectivo.router"));
-var Chofer_route_1 = __importDefault(require("./routes/Chofer.route"));
-var Recorrido_route_1 = __importDefault(require("./routes/Recorrido.route"));
-var Calendario_route_1 = __importDefault(require("./routes/Calendario.route"));
-var Parada_route_1 = __importDefault(require("./routes/Parada.route"));
-var app = express_1.default();
+var Empresa_service_1 = require("./services/Empresa.service");
+var Empresa_controller_1 = require("./repositories/Empresa.controller");
+var Empresa_route_1 = require("./controllers/Empresa.route");
+var entity = new typeorm_1.Repository();
+var repo = new Empresa_controller_1.EmpresaRepository(entity);
+var service = new Empresa_service_1.EmpresaService(repo);
+var controller = new Empresa_route_1.EmpresaRouter(service);
 typeorm_1.createConnection();
+var app = express_1.default();
 //middlewars
 app.use(cors_1.default());
 app.use(morgan_1.default('dev'));
 app.use(express_1.default.json());
+app.get('/empresa', controller.findAll);
 // routes
-app.use(Empresa_route_1.default, function (err, req, res, next) {
-    if (res.headersSent) {
-        return next(err);
-    }
-    res.status(500);
-    res.render('error', { error: err });
-});
-app.use(Chofer_route_1.default, function (err, req, res, next) {
-    if (res.headersSent) {
-        return next(err);
-    }
-    res.status(500);
-    res.render('error', { error: 'Error no identificado' });
-});
-app.use(Calendario_route_1.default, function (err, req, res, next) {
-    if (res.headersSent) {
-        return next(err);
-    }
-    res.status(500);
-    res.render('error', { error: 'Error no identificado' });
-});
-app.use(Recorrido_route_1.default, function (err, req, res, next) {
-    if (res.headersSent) {
-        return next(err);
-    }
-    res.status(500);
-    res.render('error', { error: 'Error no identificado' });
-});
-app.use(LineaColectivo_router_1.default, function (err, req, res, next) {
-    if (res.headersSent) {
-        return next(err);
-    }
-    res.status(500);
-    res.render('error', { error: 'Error no identificado' });
-});
-app.use(Parada_route_1.default, function (err, req, res, next) {
-    if (res.headersSent) {
-        return next(err);
-    }
-    res.status(500);
-    res.render('error', { error: 'Error no identificado' });
-});
+// app.use(empresaRouter.findAll, function(err: any, req: any, res: any, next: any){
+//     if (res.headersSent) {
+//         return next(err);
+//       }
+//       res.status(500);
+//       res.render('error', { error: err });
+// });
 app.listen(3000);
 console.log('Server on port', 3000);

@@ -1,7 +1,7 @@
 import { Router } from 'express'
 const router = Router();
 
-import { getRecorridos, getRecorrido, createRecorrido, updateRecorrido, deleteRecorrido } from '../controller/Recorrido.controller'
+import { getRecorridos, getRecorrido, createRecorrido, updateRecorrido, deleteRecorrido } from '../repositories/Recorrido.repository'
 
 router.get('/recorrido', getRecorridos);    
 router.get('/recorrido/:IdRecorrido', getRecorrido);

@@ -2,7 +2,7 @@ import { Router } from 'express'
 const router = Router()
 
 
-import { getCalendarios, getCalendario, createCalendario, updateCalendario, deleteCalendario } from '../controller/Calendario.controller'
+import { getCalendarios, getCalendario, createCalendario, updateCalendario, deleteCalendario } from '../repositories/Calendario.repository'
 
 router.get('/calendario', getCalendarios);
 router.get('/calendario/:IdCalendario', getCalendario);
