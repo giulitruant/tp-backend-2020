@@ -1,7 +1,7 @@
 import { getRepository, createQueryBuilder, Repository } from 'typeorm'
 import { Chofer } from '../entity/Chofer'
 
-export class ChoferReposiitory{
+export class ChoferRepository{
     private repositorys: Repository<Chofer>;
 
     constructor(

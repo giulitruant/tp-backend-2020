@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm'
 import { Calendario } from '../entity/Calendario'
 
-export class EmpresaRepository{
+export class CalendarioRepository{
     private repositorys: Repository<Calendario>;
 
     constructor(
@@ -27,13 +27,25 @@ export class EmpresaRepository{
 
     public async createCalendario(item: Calendario){
         const calendar = await this.repositorys.findOne(item.IdCalendario);
-        if(calendar !== undefined && calendar){
-            const result = this.repositorys.merge(calendar, item);
-            await this.repositorys.save(result);
+        if(calendar !== undefined){
+            throw { status: 404, message: 'Calendario not found' };
 
         }
+        const result = await this.repositorys.create(item);
+        await this.repositorys.save(result);
 
-        throw { status: 404, message: 'Calendario not found' };
+        
+    }
+
+    public async updateCalendario(item: Calendario){
+        const calendar = await this.repositorys.findOne(item.IdCalendario);
+        if(calendar === undefined){
+            throw { status: 404, message: 'Calendario not found' };
+            
+        }
+        const result = await this.repositorys.merge(calendar, item);
+        await this.repositorys.save(result);
+        
     }
 
     public async deleteCalendario(idCalendario: any){
