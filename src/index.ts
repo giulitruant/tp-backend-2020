@@ -9,7 +9,7 @@ import { createConnection, Repository } from 'typeorm'
 import { EmpresaService } from './services/Empresa.service';
 import { EmpresaRepository } from './repositories/Empresa.repository';
 import { Empresa } from './entity/Empresa';
- import { EmpresaRouter } from './controllers/Empresa.controller';
+import { EmpresaRouter } from './controllers/Empresa.controller';
 
 const entity = new Repository<Empresa>();
 const repo = new EmpresaRepository(entity);
