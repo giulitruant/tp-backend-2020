@@ -1,7 +1,7 @@
 import { Chofer } from '../entity/Chofer';
 import { ChoferRepository } from '../repositories/Chofer.repository';
 
-export class LineaColectivoService{
+export class ChoferService{
     constructor(private repo: ChoferRepository){
         this.getAll = this.getAll.bind(this);
         this.getOne = this.getOne.bind(this);

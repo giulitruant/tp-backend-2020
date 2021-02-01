@@ -1,7 +1,7 @@
 import { Calendario } from '../entity/Calendario';
 import { CalendarioRepository } from '../repositories/Calendario.repository';
 
-export class LineaColectivoService{
+export class CalendarioService{
     constructor(private repo: CalendarioRepository){
         this.getAll = this.getAll.bind(this);
         this.getOne = this.getOne.bind(this);

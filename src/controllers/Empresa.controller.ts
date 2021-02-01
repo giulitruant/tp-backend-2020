@@ -1,7 +1,7 @@
 import {NextFunction, Router, Request, Response } from 'express'
 import { EmpresaService } from '../services/Empresa.service';
 
-export class EmpresaRouter{
+export class EmpresaController{
     constructor(private empresaService: EmpresaService){        
         this.getAll = this.getAll.bind(this);
         this.getOne = this.getOne.bind(this);

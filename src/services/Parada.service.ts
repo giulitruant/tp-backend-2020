@@ -1,7 +1,7 @@
 import { Parada } from '../entity/Parada';
 import { ParadaColectivoRepository } from '../repositories/Parada.repository';
 
-export class LineaColectivoService{
+export class ParadaService{
     constructor(private repo: ParadaColectivoRepository){
         this.getAll = this.getAll.bind(this);
         this.getOne = this.getOne.bind(this);

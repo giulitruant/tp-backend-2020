@@ -1,10 +1,13 @@
 import { Recorrido } from '../entity/Recorrido';
 import { RecorridoRepository } from '../repositories/Recorrido.repository';
 
-export class LineaColectivoService{
+export class RecorridoService{
     constructor(private repo: RecorridoRepository){
         this.getAll = this.getAll.bind(this);
         this.getOne = this.getOne.bind(this);
+        this.create = this.create.bind(this);
+        this.update = this.update.bind(this);
+        this.delete = this.delete.bind(this);
         
     }
 
