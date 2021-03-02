@@ -3,11 +3,11 @@ import { EmpresaService } from '../services/Empresa.service';
 
 export class EmpresaController{
     constructor(private empresaService: EmpresaService){        
-        this.getAll = this.getAll.bind(this);
-        this.getOne = this.getOne.bind(this);
-        this.create = this.create.bind(this);
-        this.update = this.update.bind(this);
-        this.delete = this.delete.bind(this);
+        // this.getAll = this.getAll.bind(this);
+        // this.getOne = this.getOne.bind(this);
+        // this.create = this.create.bind(this);
+        // this.update = this.update.bind(this);
+        // this.delete = this.delete.bind(this);
 
     }
 

@@ -37,10 +37,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RecorridoController = void 0;
-// const router = Router();
 var RecorridoController = /** @class */ (function () {
     function RecorridoController(service) {
         this.service = service;
+        // this.create = this.create.bind(this);
+        // this.delete = this.delete.bind(this);
+        // this.getAll = this.getAll.bind(this);
+        // this.getOne = this.getOne.bind(this);
+        // this.update = this.update.bind(this);
     }
     RecorridoController.prototype.getAll = function (req, res, next) {
         var _this = this;

@@ -1,9 +1,14 @@
-import {NextFunction, Router, Request, Response } from 'express';
+import {NextFunction, Request, Response } from 'express';
 import { RecorridoService } from '../services/Recorrido.service';
-// const router = Router();
 
 export class RecorridoController{
-    constructor(private service: RecorridoService){}
+    constructor(private service: RecorridoService){
+        // this.create = this.create.bind(this);
+        // this.delete = this.delete.bind(this);
+        // this.getAll = this.getAll.bind(this);
+        // this.getOne = this.getOne.bind(this);
+        // this.update = this.update.bind(this);
+    }
 
     public getAll(req: Request, res: Response, next: NextFunction){
         (async () => {

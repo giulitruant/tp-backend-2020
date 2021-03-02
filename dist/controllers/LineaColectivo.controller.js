@@ -40,12 +40,12 @@ exports.LineaColectivoController = void 0;
 //const router = Router()
 var LineaColectivoController = /** @class */ (function () {
     function LineaColectivoController(lineaServices) {
+        // this.getAll = this.getAll.bind(this);
+        // this.getOne = this.getOne.bind(this);
+        // this.create = this.create.bind(this);
+        // this.update = this.update.bind(this);
+        // this.delete = this.delete.bind(this);        
         this.lineaServices = lineaServices;
-        this.getAll = this.getAll.bind(this);
-        this.getOne = this.getOne.bind(this);
-        this.create = this.create.bind(this);
-        this.update = this.update.bind(this);
-        this.delete = this.delete.bind(this);
     }
     LineaColectivoController.prototype.getAll = function (req, res, next) {
         var _this = this;

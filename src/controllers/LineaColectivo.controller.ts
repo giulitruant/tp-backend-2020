@@ -4,11 +4,11 @@ import { LineaColectivoService } from '../services/LineaColectivo.service';
 
 export class LineaColectivoController{    
     constructor(private lineaServices: LineaColectivoService){
-        this.getAll = this.getAll.bind(this);
-        this.getOne = this.getOne.bind(this);
-        this.create = this.create.bind(this);
-        this.update = this.update.bind(this);
-        this.delete = this.delete.bind(this);        
+        // this.getAll = this.getAll.bind(this);
+        // this.getOne = this.getOne.bind(this);
+        // this.create = this.create.bind(this);
+        // this.update = this.update.bind(this);
+        // this.delete = this.delete.bind(this);        
 
     }
 

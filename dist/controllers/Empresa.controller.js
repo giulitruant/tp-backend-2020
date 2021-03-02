@@ -39,12 +39,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmpresaController = void 0;
 var EmpresaController = /** @class */ (function () {
     function EmpresaController(empresaService) {
+        // this.getAll = this.getAll.bind(this);
+        // this.getOne = this.getOne.bind(this);
+        // this.create = this.create.bind(this);
+        // this.update = this.update.bind(this);
+        // this.delete = this.delete.bind(this);
         this.empresaService = empresaService;
-        this.getAll = this.getAll.bind(this);
-        this.getOne = this.getOne.bind(this);
-        this.create = this.create.bind(this);
-        this.update = this.update.bind(this);
-        this.delete = this.delete.bind(this);
     }
     EmpresaController.prototype.getAll = function (req, res, next) {
         var _this = this;
