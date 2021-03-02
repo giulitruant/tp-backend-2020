@@ -9,26 +9,22 @@ var morgan_1 = __importDefault(require("morgan"));
 var cors_1 = __importDefault(require("cors"));
 var typeorm_1 = require("typeorm");
 var Empresa_service_1 = require("./services/Empresa.service");
-var Empresa_controller_1 = require("./repositories/Empresa.controller");
-var Empresa_route_1 = require("./controllers/Empresa.route");
-var entity = new typeorm_1.Repository();
-var repo = new Empresa_controller_1.EmpresaRepository(entity);
-var service = new Empresa_service_1.EmpresaService(repo);
-var controller = new Empresa_route_1.EmpresaRouter(service);
+var Empresa_repository_1 = require("./repositories/Empresa.repository");
+var Empresa_controller_1 = require("./controllers/Empresa.controller");
+var empresaEntity = new typeorm_1.Repository();
+var empresaRepo = new Empresa_repository_1.EmpresaRepository(empresaEntity);
+var empresaService = new Empresa_service_1.EmpresaService(empresaRepo);
+var empresaController = new Empresa_controller_1.EmpresaController(empresaService);
 typeorm_1.createConnection();
 var app = express_1.default();
 //middlewars
 app.use(cors_1.default());
 app.use(morgan_1.default('dev'));
 app.use(express_1.default.json());
-app.get('/empresa', controller.findAll);
-// routes
-// app.use(empresaRouter.findAll, function(err: any, req: any, res: any, next: any){
-//     if (res.headersSent) {
-//         return next(err);
-//       }
-//       res.status(500);
-//       res.render('error', { error: err });
-// });
+app.get('/empresa', empresaController.getAll);
+app.get('/empresa/:cuit', empresaController.getOne);
+app.get('/empresa', empresaController.create);
+app.get('/empresa', empresaController.update);
+app.get('/empresa/:cuit', empresaController.delete);
 app.listen(3000);
 console.log('Server on port', 3000);

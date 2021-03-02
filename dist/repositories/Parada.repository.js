@@ -36,111 +36,98 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteParada = exports.updateParada = exports.createParada = exports.getParada = exports.getParadas = void 0;
+exports.ParadaColectivoRepository = void 0;
 var typeorm_1 = require("typeorm");
-var Parada_1 = require("../entity/Parada");
-exports.getParadas = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var paradas;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, typeorm_1.getRepository(Parada_1.Parada).find()];
-            case 1:
-                paradas = _a.sent();
-                return [2 /*return*/, res.json(paradas)];
-        }
-    });
-}); };
-exports.getParada = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var parada, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, typeorm_1.getRepository(Parada_1.Parada).findOne(req.params.nroParada)];
-            case 1:
-                parada = _a.sent();
-                if (parada !== undefined) {
-                    return [2 /*return*/, res.status(200).json(parada)];
+var ParadaColectivoRepository = /** @class */ (function () {
+    function ParadaColectivoRepository(repository) {
+        this.repository = repository;
+        this.repositorys = new typeorm_1.Repository();
+        this.repositorys = repository;
+    }
+    ParadaColectivoRepository.prototype.getParadas = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repositorys.find()];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
-                else {
-                    return [2 /*return*/, res.status(204).send({ Message: 'Parada de colectivo not found' })];
+            });
+        });
+    };
+    ParadaColectivoRepository.prototype.getParada = function (nroParada) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repositorys.findOne(nroParada)];
+                    case 1:
+                        result = _a.sent();
+                        if (result === undefined) {
+                            throw { status: 404, message: 'Parada de colectivo not found' };
+                        }
+                        return [2 /*return*/, result];
                 }
-                return [3 /*break*/, 3];
-            case 2:
-                error_1 = _a.sent();
-                console.dir(error_1);
-                return [2 /*return*/, res.status(400).send({ Message: 'Error al obtener la parada de colectivo' })];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-exports.createParada = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var isParadaColectivoExist, parada, result, error_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 6, , 7]);
-                return [4 /*yield*/, typeorm_1.getRepository(Parada_1.Parada).findOne(req.params.NroParada)];
-            case 1:
-                isParadaColectivoExist = _a.sent();
-                if (!(isParadaColectivoExist === undefined)) return [3 /*break*/, 4];
-                return [4 /*yield*/, typeorm_1.getRepository(Parada_1.Parada).create(req.body)];
-            case 2:
-                parada = _a.sent();
-                return [4 /*yield*/, typeorm_1.getRepository(Parada_1.Parada).save(parada)];
-            case 3:
-                result = _a.sent();
-                return [2 /*return*/, res.status(200).json(result)];
-            case 4: return [2 /*return*/, res.status(204).send({ Message: 'Parada de colectivo existente' })];
-            case 5: return [3 /*break*/, 7];
-            case 6:
-                error_2 = _a.sent();
-                console.dir(error_2);
-                return [2 /*return*/, res.status(400).send({ Message: 'Error al crear la parada de colectivo' })];
-            case 7: return [2 /*return*/];
-        }
-    });
-}); };
-exports.updateParada = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var parada, result, error_3;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 5, , 6]);
-                return [4 /*yield*/, typeorm_1.getRepository(Parada_1.Parada).findOne(req.params.NroParada)];
-            case 1:
-                parada = _a.sent();
-                if (!(parada !== undefined)) return [3 /*break*/, 3];
-                typeorm_1.getRepository(Parada_1.Parada).merge(parada, req.body);
-                return [4 /*yield*/, typeorm_1.getRepository(Parada_1.Parada).save(parada)];
-            case 2:
-                result = _a.sent();
-                return [2 /*return*/, res.status(200).json(result)];
-            case 3: return [2 /*return*/, res.status(204).send({ Message: 'Parada de colectivo not found' })];
-            case 4: return [3 /*break*/, 6];
-            case 5:
-                error_3 = _a.sent();
-                console.dir(error_3);
-                return [2 /*return*/, res.status(404).send({ message: 'Error al actualizar la Parada de colectivo' })];
-            case 6: return [2 /*return*/];
-        }
-    });
-}); };
-exports.deleteParada = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var result, error_4;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, typeorm_1.getRepository(Parada_1.Parada).delete(req.params.NroParada)];
-            case 1:
-                result = _a.sent();
-                return [2 /*return*/, res.status(200).json(result)];
-            case 2:
-                error_4 = _a.sent();
-                console.dir(error_4);
-                return [2 /*return*/, res.status(400).send({ Message: 'Error al eliminar la parada de colectivo' })];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
+            });
+        });
+    };
+    ParadaColectivoRepository.prototype.createParada = function (paradaColectivo) {
+        return __awaiter(this, void 0, void 0, function () {
+            var parada, insertedParada;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repositorys.findOne(paradaColectivo.NroParada)];
+                    case 1:
+                        parada = _a.sent();
+                        if (parada !== undefined) {
+                            throw { status: 404, message: 'Parada de colectivo exists' };
+                        }
+                        return [4 /*yield*/, this.repositorys.create(paradaColectivo)];
+                    case 2:
+                        insertedParada = _a.sent();
+                        return [4 /*yield*/, this.repositorys.save(insertedParada)];
+                    case 3:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ParadaColectivoRepository.prototype.updateParada = function (item) {
+        return __awaiter(this, void 0, void 0, function () {
+            var parada;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repositorys.findOne(item.NroParada)];
+                    case 1:
+                        parada = _a.sent();
+                        if (parada === undefined) {
+                            throw { status: 404, message: 'Parada de colectivo not found' };
+                        }
+                        return [4 /*yield*/, this.repositorys.merge(parada, item)];
+                    case 2:
+                        parada = _a.sent();
+                        return [4 /*yield*/, this.repositorys.save(parada)];
+                    case 3: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    ParadaColectivoRepository.prototype.deleteParada = function (nroParada) {
+        return __awaiter(this, void 0, void 0, function () {
+            var isDeleted;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repositorys.delete(nroParada)];
+                    case 1:
+                        isDeleted = _a.sent();
+                        if (isDeleted.affected === null) {
+                            throw { status: 404, message: 'Nro de parada nor found' };
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return ParadaColectivoRepository;
+}());
+exports.ParadaColectivoRepository = ParadaColectivoRepository;

@@ -36,114 +36,103 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteRecorrido = exports.updateRecorrido = exports.createRecorrido = exports.getRecorrido = exports.getRecorridos = void 0;
+exports.RecorridoRepository = void 0;
 var typeorm_1 = require("typeorm");
-var Recorrido_1 = require("../entity/Recorrido");
-exports.getRecorridos = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var recorridos;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, typeorm_1.getRepository(Recorrido_1.Recorrido).find()];
-            case 1:
-                recorridos = _a.sent();
-                return [2 /*return*/, res.json(recorridos)];
-        }
-    });
-}); };
-exports.getRecorrido = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var recorrido, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, typeorm_1.createQueryBuilder("Recorrido")
-                        .leftJoinAndSelect('Recorrido.lineaColectivo', 'LineaColectivo')
-                        .where("Recorrido.IdRecorrido = :IdRecorrido", { IdRecorrido: req.params.IdRecorrido })
-                        .getMany()];
-            case 1:
-                recorrido = _a.sent();
-                if (recorrido) {
-                    return [2 /*return*/, res.status(200).json(recorrido)];
+var RecorridoRepository = /** @class */ (function () {
+    function RecorridoRepository(repository) {
+        this.repository = repository;
+        this.repositorys = new typeorm_1.Repository();
+        this.repositorys = repository;
+    }
+    RecorridoRepository.prototype.getRecorridos = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repositorys.find()];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
-                else {
-                    return [2 /*return*/, res.status(204).send({ Messsage: 'Recorrido not found' })];
+            });
+        });
+    };
+    RecorridoRepository.prototype.getRecorrido = function (idRecorrido) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repositorys.createQueryBuilder("Recorrido")
+                            .leftJoinAndSelect('Recorrido.lineaColectivo', 'LineaColectivo')
+                            .where("Recorrido.IdRecorrido = :IdRecorrido", { IdRecorrido: idRecorrido })
+                            .getMany()];
+                    case 1:
+                        result = _a.sent();
+                        if (result === undefined) {
+                            throw { status: 404, message: 'Recorrido not found' };
+                        }
+                        return [2 /*return*/, result];
                 }
-                return [3 /*break*/, 3];
-            case 2:
-                error_1 = _a.sent();
-                console.log('Error :' + error_1);
-                return [2 /*return*/, res.status(400).send({ Messsage: 'Error al obtener el recorrido' })];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-exports.createRecorrido = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var nuevoRecorrido, recorrido, reco, error_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 6, , 7]);
-                return [4 /*yield*/, typeorm_1.getRepository(Recorrido_1.Recorrido).find()];
-            case 1:
-                nuevoRecorrido = _a.sent();
-                if (!(nuevoRecorrido !== undefined && nuevoRecorrido)) return [3 /*break*/, 4];
-                return [4 /*yield*/, typeorm_1.getRepository(Recorrido_1.Recorrido).create(req.body)];
-            case 2:
-                recorrido = _a.sent();
-                return [4 /*yield*/, typeorm_1.getRepository(Recorrido_1.Recorrido).save(recorrido)];
-            case 3:
-                reco = _a.sent();
-                return [2 /*return*/, res.status(200).json(reco)];
-            case 4: return [2 /*return*/, res.status(204).send(nuevoRecorrido)];
-            case 5: return [3 /*break*/, 7];
-            case 6:
-                error_2 = _a.sent();
-                console.log('Error :' + error_2);
-                return [2 /*return*/, res.status(400).send({ msj: 'Error al crear el recorrido' })];
-            case 7: return [2 /*return*/];
-        }
-    });
-}); };
-exports.updateRecorrido = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var recorrido, result, error_3;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 5, , 6]);
-                return [4 /*yield*/, typeorm_1.getRepository(Recorrido_1.Recorrido).findOne(req.params.IdRecorrido)];
-            case 1:
-                recorrido = _a.sent();
-                if (!(recorrido !== undefined && recorrido)) return [3 /*break*/, 3];
-                typeorm_1.getRepository(Recorrido_1.Recorrido).merge(recorrido, req.body);
-                return [4 /*yield*/, typeorm_1.getRepository(Recorrido_1.Recorrido).save(recorrido)];
-            case 2:
-                result = _a.sent();
-                return [2 /*return*/, res.json(result)];
-            case 3: return [2 /*return*/, res.status(204).send({ Message: 'Recorrido not found' })];
-            case 4: return [3 /*break*/, 6];
-            case 5:
-                error_3 = _a.sent();
-                console.log('Error :' + error_3);
-                return [2 /*return*/, res.status(404).send({ Message: 'Error al actualizar el recorrido' })];
-            case 6: return [2 /*return*/];
-        }
-    });
-}); };
-exports.deleteRecorrido = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var result, error_4;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, typeorm_1.getRepository(Recorrido_1.Recorrido).delete(req.params.IdRecorrido)];
-            case 1:
-                result = _a.sent();
-                return [2 /*return*/, res.status(200).json(result)];
-            case 2:
-                error_4 = _a.sent();
-                console.log('Error :' + error_4);
-                return [2 /*return*/, res.status(400).send({ Message: 'Error al eliminar el recorrido' })];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
+            });
+        });
+    };
+    RecorridoRepository.prototype.createRecorrido = function (item) {
+        return __awaiter(this, void 0, void 0, function () {
+            var recorrido;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repositorys.findOne(item.IdRecorrido)];
+                    case 1:
+                        recorrido = _a.sent();
+                        if (recorrido !== undefined) {
+                            throw { status: 404, message: 'Recorrido exists' };
+                        }
+                        return [4 /*yield*/, this.repositorys.create(item)];
+                    case 2:
+                        recorrido = _a.sent();
+                        return [4 /*yield*/, this.repositorys.save(recorrido)];
+                    case 3:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    RecorridoRepository.prototype.updateRecorrido = function (item) {
+        return __awaiter(this, void 0, void 0, function () {
+            var recorrido;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repositorys.findOne(item)];
+                    case 1:
+                        recorrido = _a.sent();
+                        if (recorrido === undefined) {
+                            throw { status: 404, message: 'Recorrido not found' };
+                        }
+                        return [4 /*yield*/, this.repository.merge(recorrido, item)];
+                    case 2:
+                        recorrido = _a.sent();
+                        return [4 /*yield*/, this.repository.save(recorrido)];
+                    case 3:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    RecorridoRepository.prototype.deleteRecorrido = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repositorys.delete(id)];
+                    case 1:
+                        result = _a.sent();
+                        if (result.affected === null) {
+                            throw { status: 404, message: 'Recorrido not found' };
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return RecorridoRepository;
+}());
+exports.RecorridoRepository = RecorridoRepository;

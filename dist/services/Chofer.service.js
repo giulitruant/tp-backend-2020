@@ -36,86 +36,63 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ParadaController = void 0;
-var ParadaController = /** @class */ (function () {
-    function ParadaController(service) {
-        this.service = service;
+exports.ChoferService = void 0;
+var ChoferService = /** @class */ (function () {
+    function ChoferService(repo) {
+        this.repo = repo;
+        this.getAll = this.getAll.bind(this);
+        this.getOne = this.getOne.bind(this);
     }
-    ParadaController.prototype.getAll = function (req, res, next) {
-        var _this = this;
-        (function () { return __awaiter(_this, void 0, void 0, function () {
-            var paradas;
+    ChoferService.prototype.getAll = function () {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.service.getAll()];
-                    case 1:
-                        paradas = _a.sent();
-                        return [2 /*return*/, res.send(200).json(paradas)];
+                    case 0: return [4 /*yield*/, this.repo.getChoferes()];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
-        }); })().catch(next);
+        });
     };
-    ParadaController.prototype.getOne = function (req, res, next) {
-        var _this = this;
-        (function () { return __awaiter(_this, void 0, void 0, function () {
-            var parada;
+    ChoferService.prototype.getOne = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.service.getOne(req.params.NroParada)];
-                    case 1:
-                        parada = _a.sent();
-                        return [2 /*return*/, res.send(200).json(parada)];
+                    case 0: return [4 /*yield*/, this.repo.getChofer(id)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
-        }); })().catch(next);
+        });
     };
-    ParadaController.prototype.create = function (req, res, next) {
-        var _this = this;
-        (function () { return __awaiter(_this, void 0, void 0, function () {
+    ChoferService.prototype.create = function (body) {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.service.create(req.body)];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/, res.send(200)];
+                    case 0: return [4 /*yield*/, this.repo.createChofer(body)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
-        }); })().catch(next);
+        });
     };
-    ParadaController.prototype.update = function (req, res, next) {
-        var _this = this;
-        (function () { return __awaiter(_this, void 0, void 0, function () {
+    ChoferService.prototype.update = function (body) {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.service.update(req.body)];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/, res.send(200)];
+                    case 0: return [4 /*yield*/, this.repo.updateChofer(body)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
-        }); })().catch(next);
+        });
     };
-    ParadaController.prototype.delete = function (req, res, next) {
-        var _this = this;
-        (function () { return __awaiter(_this, void 0, void 0, function () {
+    ChoferService.prototype.delete = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.service.delete(req.params.NroParada)];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/, res.send(200)];
+                    case 0: return [4 /*yield*/, this.repo.deleteChofer(id)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
-        }); })().catch(next);
+        });
     };
-    return ParadaController;
+    return ChoferService;
 }());
-exports.ParadaController = ParadaController;
-// const router = Router();
-// import { getParada, getParadas, createParada, updateParada, deleteParada } from '../repositories/Parada.repository'
-// router.get('/paradaColectivo', getParadas);
-// router.get('/paradaColectivo/:NroParada', getParada);
-// router.post('/paradaColectivo', createParada);
-// router.put('/paradaColectivo', updateParada);
-// router.delete('/paradaColectivo/:NroParada', deleteParada);
-// export default router
+exports.ChoferService = ChoferService;

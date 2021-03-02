@@ -36,128 +36,103 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteLineaColectivo = exports.updateLineaColectivo = exports.createLineaColectivo = exports.getLineaColectivo = exports.getLineaColectivos = void 0;
+exports.LineaColectivoRepository = void 0;
 var typeorm_1 = require("typeorm");
-var LineaColectivo_1 = require("../entity/LineaColectivo");
-exports.getLineaColectivos = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var lineasCol, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, typeorm_1.getRepository(LineaColectivo_1.LineaColectivo).find()];
-            case 1:
-                lineasCol = _a.sent();
-                if (lineasCol && lineasCol !== undefined) {
-                    return [2 /*return*/, res.status(200).json(lineasCol)];
+var LineaColectivoRepository = /** @class */ (function () {
+    function LineaColectivoRepository(repository) {
+        this.repository = repository;
+        this.repositorys = new typeorm_1.Repository();
+        this.repositorys = repository;
+    }
+    LineaColectivoRepository.prototype.getLineaColectivos = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repositorys.find()];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
-                else {
-                    return [2 /*return*/, res.status(204).send({ Message: 'Linea de colectivo not found' })];
+            });
+        });
+    };
+    LineaColectivoRepository.prototype.getLineaColectivo = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var lineaCol;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repositorys.createQueryBuilder('LineaColectivo')
+                            .leftJoinAndSelect('LineaColectivo.empresa', 'Empresa')
+                            .where('LineaColectivo.idLineaColectivo = :idLineaColectivo', { idLineaColectivo: id })
+                            .getOne()];
+                    case 1:
+                        lineaCol = _a.sent();
+                        if (lineaCol === undefined) {
+                            throw { status: 404, message: 'Linea de colectivo not found' };
+                        }
+                        return [2 /*return*/, lineaCol];
                 }
-                return [3 /*break*/, 3];
-            case 2:
-                error_1 = _a.sent();
-                return [2 /*return*/, res.status(400).send({ Message: 'Hubo un error al obtener las lineas de colectivos' })];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-exports.getLineaColectivo = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var lineaColEmpresa, error_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, typeorm_1.createQueryBuilder('LineaColectivo')
-                        .leftJoinAndSelect('LineaColectivo.empresa', 'Empresa')
-                        .where('LineaColectivo.idLineaColectivo = :idLineaColectivo', { idLineaColectivo: req.params.id })
-                        .getOne()];
-            case 1:
-                lineaColEmpresa = _a.sent();
-                if (lineaColEmpresa != undefined && lineaColEmpresa) {
-                    return [2 /*return*/, res.status(200).json(lineaColEmpresa)];
+            });
+        });
+    };
+    LineaColectivoRepository.prototype.createLineaColectivo = function (item) {
+        return __awaiter(this, void 0, void 0, function () {
+            var linea;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repositorys.findOne(item.idLineaColectivo)];
+                    case 1:
+                        linea = _a.sent();
+                        if (linea !== undefined) {
+                            throw { status: 404, message: 'Linea de colectivo exists' };
+                        }
+                        return [4 /*yield*/, this.repositorys.create(item)];
+                    case 2:
+                        linea = _a.sent();
+                        return [4 /*yield*/, this.repositorys.save(linea)];
+                    case 3:
+                        _a.sent();
+                        return [2 /*return*/];
                 }
-                else {
-                    return [2 /*return*/, res.status(204).send({ Message: 'Linea de colectivo not found' })];
+            });
+        });
+    };
+    LineaColectivoRepository.prototype.updateLineaColectivo = function (item) {
+        return __awaiter(this, void 0, void 0, function () {
+            var linea, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repositorys.findOne(item.idLineaColectivo)];
+                    case 1:
+                        linea = _a.sent();
+                        if (linea === undefined) {
+                            throw { status: 404, message: 'Linea de colectivo exists' };
+                        }
+                        return [4 /*yield*/, this.repositorys.merge(linea, item)];
+                    case 2:
+                        result = _a.sent();
+                        return [4 /*yield*/, this.repositorys.save(result)];
+                    case 3:
+                        _a.sent();
+                        return [2 /*return*/];
                 }
-                return [3 /*break*/, 3];
-            case 2:
-                error_2 = _a.sent();
-                return [2 /*return*/, res.status(400).json({ Message: 'No existe o no se pudo obtener la Linea de colectivo' })];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-exports.createLineaColectivo = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var lineaCol, lineaC, error_3;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 3, , 4]);
-                return [4 /*yield*/, typeorm_1.getRepository(LineaColectivo_1.LineaColectivo).create(req.body)];
-            case 1:
-                lineaCol = _a.sent();
-                return [4 /*yield*/, typeorm_1.getRepository(LineaColectivo_1.LineaColectivo).save(lineaCol)];
-            case 2:
-                lineaC = _a.sent();
-                if (lineaC !== undefined && lineaC) {
-                    return [2 /*return*/, res.status(204).json(lineaC)];
+            });
+        });
+    };
+    LineaColectivoRepository.prototype.deleteLineaColectivo = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.repositorys.delete(id)];
+                    case 1:
+                        result = _a.sent();
+                        if (result.affected === null) {
+                            throw { status: 404, message: 'Linea de colectivo do not exists' };
+                        }
+                        return [2 /*return*/];
                 }
-                else {
-                    return [2 /*return*/, res.status(204).send({ Message: 'errro al crear la linea de colectivo' })];
-                }
-                return [3 /*break*/, 4];
-            case 3:
-                error_3 = _a.sent();
-                return [2 /*return*/, res.status(404).send({ Message: error_3.message })];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); };
-exports.updateLineaColectivo = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var lineaCol, result, error_4;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 5, , 6]);
-                return [4 /*yield*/, typeorm_1.getRepository(LineaColectivo_1.LineaColectivo).findOne(req.params.idLineaColectivo)];
-            case 1:
-                lineaCol = _a.sent();
-                if (!(lineaCol !== undefined && lineaCol)) return [3 /*break*/, 3];
-                typeorm_1.getRepository(LineaColectivo_1.LineaColectivo).merge(lineaCol, req.body);
-                return [4 /*yield*/, typeorm_1.getRepository(LineaColectivo_1.LineaColectivo).save(lineaCol)];
-            case 2:
-                result = _a.sent();
-                return [2 /*return*/, res.json(result)];
-            case 3: return [2 /*return*/, res.status(404).send({ Message: 'Linea Colectivo not found' })];
-            case 4: return [3 /*break*/, 6];
-            case 5:
-                error_4 = _a.sent();
-                return [2 /*return*/, res.status(404).send({ Message: error_4.message })];
-            case 6: return [2 /*return*/];
-        }
-    });
-}); };
-exports.deleteLineaColectivo = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var result, error_5;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, typeorm_1.getRepository(LineaColectivo_1.LineaColectivo).delete(req.params.id)];
-            case 1:
-                result = _a.sent();
-                if (result !== undefined && result) {
-                    return [2 /*return*/, res.status(200).json({ Message: result })];
-                }
-                else {
-                    return [2 /*return*/, res.status(200).json({ Message: result })];
-                }
-                return [3 /*break*/, 3];
-            case 2:
-                error_5 = _a.sent();
-                return [2 /*return*/, res.status(200).json({ msj: error_5 })];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
+            });
+        });
+    };
+    return LineaColectivoRepository;
+}());
+exports.LineaColectivoRepository = LineaColectivoRepository;
