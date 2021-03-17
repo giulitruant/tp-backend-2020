@@ -4,7 +4,7 @@ import { EmpresaRepository } from '../repositories/Empresa.repository';
 export class EmpresaService{
     constructor(private repo: EmpresaRepository){
         this.getAll = this.getAll.bind(this);
-        this.getOne = this.getOne.bind(this);
+        // this.getOne = this.getOne.bind(this);
         
     }
 
@@ -13,23 +13,23 @@ export class EmpresaService{
 
     }
 
-    public async getOne(id: any){
-        return await this.repo.getEmpresa(id);
+    // public async getOne(id: any){
+    //     return await this.repo.getEmpresa(id);
 
-    }
+    // }
 
-    public async create(body: Empresa){
-        return await this.repo.createEmpresa(body);
+    // public async create(body: Empresa){
+    //     return await this.repo.createEmpresa(body);
 
-    }
+    // }
 
-    public async update(body: Empresa){
-        return await this.repo.updateEmpresa(body);
+    // public async update(body: Empresa){
+    //     return await this.repo.updateEmpresa(body);
 
-    }
+    // }
 
-    public async delete(id: any){
-        return await this.repo.deleteEmpresa(id);
-    }
+    // public async delete(id: any){
+    //     return await this.repo.deleteEmpresa(id);
+    // }
 
 }

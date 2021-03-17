@@ -37,88 +37,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmpresaRepository = void 0;
-var typeorm_1 = require("typeorm");
-var Empresa_1 = require("../entity/Empresa");
 var EmpresaRepository = /** @class */ (function () {
     function EmpresaRepository(repository) {
         this.repository = repository;
-        this.repositorys = repository;
+        this.getEmpresas = this.getEmpresas.bind(this);
     }
     EmpresaRepository.prototype.getEmpresas = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.repositorys.find()];
+                    case 0: return [4 /*yield*/, this.repository.find()];
                     case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    EmpresaRepository.prototype.getEmpresa = function (cuit) {
-        return __awaiter(this, void 0, void 0, function () {
-            var result;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.repositorys.findOne(cuit)];
-                    case 1:
-                        result = _a.sent();
-                        if (result === undefined) {
-                            throw { status: 404, message: 'Empresa wasnt create' };
-                        }
-                        return [2 /*return*/, result];
-                }
-            });
-        });
-    };
-    EmpresaRepository.prototype.createEmpresa = function (emp) {
-        return __awaiter(this, void 0, void 0, function () {
-            var empresa, InsertedEmpresa;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_1.getRepository(Empresa_1.Empresa).create(emp)];
-                    case 1:
-                        empresa = _a.sent();
-                        InsertedEmpresa = typeorm_1.getRepository(Empresa_1.Empresa).save(empresa);
-                        if (InsertedEmpresa == undefined) {
-                            throw { status: 404, message: 'Empresa not found' };
-                        }
-                        return [2 /*return*/, InsertedEmpresa];
-                }
-            });
-        });
-    };
-    EmpresaRepository.prototype.updateEmpresa = function (emp) {
-        return __awaiter(this, void 0, void 0, function () {
-            var empresa, result;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_1.getRepository(Empresa_1.Empresa).findOne(emp.Cuit)];
-                    case 1:
-                        empresa = _a.sent();
-                        if (empresa === undefined) {
-                            throw { status: 404, message: 'Empresa not found' };
-                        }
-                        result = typeorm_1.getRepository(Empresa_1.Empresa).merge(empresa, emp);
-                        return [4 /*yield*/, typeorm_1.getRepository(Empresa_1.Empresa).save(result)];
-                    case 2:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    EmpresaRepository.prototype.deleteEmpresa = function (cuit) {
-        return __awaiter(this, void 0, void 0, function () {
-            var emp;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_1.getRepository(Empresa_1.Empresa).delete(cuit)];
-                    case 1:
-                        emp = _a.sent();
-                        if (emp.affected === null) {
-                            throw { status: 404, message: 'Empresa not found' };
-                        }
-                        return [2 /*return*/];
                 }
             });
         });

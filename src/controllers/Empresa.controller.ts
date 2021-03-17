@@ -3,7 +3,7 @@ import { EmpresaService } from '../services/Empresa.service';
 
 export class EmpresaController{
     constructor(private empresaService: EmpresaService){        
-        // this.getAll = this.getAll.bind(this);
+        this.getAll = this.getAll.bind(this);
         // this.getOne = this.getOne.bind(this);
         // this.create = this.create.bind(this);
         // this.update = this.update.bind(this);
@@ -19,34 +19,34 @@ export class EmpresaController{
         })().catch(next);
     }
 
-    public getOne(req: Request, res: Response, next: NextFunction){
-        (async () => {
-            return await this.empresaService.getOne(req.params.Cuit);            
+    // public getOne(req: Request, res: Response, next: NextFunction){
+    //     (async () => {
+    //         return await this.empresaService.getOne(req.params.Cuit);            
 
-        })().catch(next);
-    }
+    //     })().catch(next);
+    // }
 
-    public create(req: Request, res: Response, next: NextFunction){
-        (async () => {
-            return await this.empresaService.create(req.body);
+    // public create(req: Request, res: Response, next: NextFunction){
+    //     (async () => {
+    //         return await this.empresaService.create(req.body);
 
-        })().catch(next);
+    //     })().catch(next);
 
-    }
+    // }
 
-    public update(req: Request, res: Response, next: NextFunction){
-        (async () => {
-            return await this.empresaService.update(req.body);
+    // public update(req: Request, res: Response, next: NextFunction){
+    //     (async () => {
+    //         return await this.empresaService.update(req.body);
 
-        })().catch(next);
+    //     })().catch(next);
 
-    }
+    // }
 
-    public delete(req: Request, res: Response, next: NextFunction){
-        (async () => {
-            return await this.empresaService.delete(req.params.Cuit);
+    // public delete(req: Request, res: Response, next: NextFunction){
+    //     (async () => {
+    //         return await this.empresaService.delete(req.params.Cuit);
 
-        })().catch(next);
+    //     })().catch(next);
 
-    }
+    // }
 }
