@@ -9,6 +9,7 @@ export class EmpresaService{
     }
 
     public async getAll(){
+        debugger;
         return await this.repo.getEmpresas();
 
     }

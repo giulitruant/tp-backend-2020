@@ -11,8 +11,6 @@ import { EmpresaRepository } from './repositories/Empresa.repository';
 import { Empresa } from './entity/Empresa';
 import { EmpresaController } from './controllers/Empresa.controller';
 
-
-
 const empresaEntity = new Repository<Empresa>();
 const empresaRepo = new EmpresaRepository(empresaEntity);
 const empresaService = new EmpresaService(empresaRepo);
