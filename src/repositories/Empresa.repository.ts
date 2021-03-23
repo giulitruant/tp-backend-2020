@@ -6,11 +6,17 @@ export class EmpresaRepository{
     constructor(
         private repository: Repository<Empresa>
     ){        
-        this.getEmpresas = this.getEmpresas.bind(this);
+        this.getEmpresas = this.getEmpresas.bind(this);        
      }
 
-    public async getEmpresas(): Promise<Empresa[]> {        
-        return await this.repository.find();
+    public async getEmpresas(): Promise<Empresa[]> {
+        const result = await getRepository(Empresa)
+        .createQueryBuilder("user").getMany();
+
+        // var companies = await Empresa.find();
+        // console.dir(companies);
+        
+        return result;
         
     }
 
