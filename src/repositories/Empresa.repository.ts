@@ -10,13 +10,13 @@ export class EmpresaRepository{
      }
 
     public async getEmpresas(): Promise<Empresa[]> {
-        const result = await getRepository(Empresa)
-        .createQueryBuilder("user").getMany();
+        // const result = await getRepository(Empresa)
+        // .createQueryBuilder("user").getMany();
 
-        // var companies = await Empresa.find();
-        // console.dir(companies);
+        var companies = await Empresa.find();
+        console.dir(companies);
         
-        return result;
+        return companies;
         
     }
 

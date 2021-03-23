@@ -37,7 +37,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmpresaRepository = void 0;
-var typeorm_1 = require("typeorm");
 var Empresa_1 = require("../entity/Empresa");
 var EmpresaRepository = /** @class */ (function () {
     function EmpresaRepository(repository) {
@@ -46,14 +45,14 @@ var EmpresaRepository = /** @class */ (function () {
     }
     EmpresaRepository.prototype.getEmpresas = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var result;
+            var companies;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_1.getRepository(Empresa_1.Empresa)
-                            .createQueryBuilder("user").getMany()];
+                    case 0: return [4 /*yield*/, Empresa_1.Empresa.find()];
                     case 1:
-                        result = _a.sent();
-                        return [2 /*return*/, result];
+                        companies = _a.sent();
+                        console.dir(companies);
+                        return [2 /*return*/, companies];
                 }
             });
         });
