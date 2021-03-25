@@ -14,48 +14,47 @@ export class EmpresaRepository{
         // .createQueryBuilder("user").getMany();
 
         var companies = await Empresa.find();
-        console.dir(companies);
         
         return companies;
         
     }
 
-    // public async getEmpresa(cuit: any){
-    //     const result = await this.repositorys.findOne(cuit);
-    //     if(result === undefined){
-    //         throw { status: 404, message: 'Empresa wasnt create' };
-    //     }
+    public async getEmpresa(cuit: any){
+        const result = await Empresa.findOne(cuit);
+        if(result === undefined){
+            throw { status: 404, message: 'Empresa wasnt create' };
+        }
 
-    //     return result;
+        return result;
 
-    // }
+    }
 
-    // public async createEmpresa(emp: Empresa){
-    //     const empresa = await getRepository(Empresa).create(emp);
-    //     const InsertedEmpresa = getRepository(Empresa).save(empresa);
-    //     if(InsertedEmpresa == undefined){
-    //         throw { status: 404, message: 'Empresa not found' };
-    //     }
+    public async createEmpresa(emp: Empresa){
+        const empresa = await Empresa.create(emp);
+        const InsertedEmpresa = await Empresa.save(empresa);
+        if(InsertedEmpresa == undefined){
+            throw { status: 404, message: 'Empresa not found' };
+        }
 
-    //     return InsertedEmpresa;
-    // }
+        return InsertedEmpresa;
+    }
 
-    // public async updateEmpresa(emp: Empresa){
-    //     const empresa = await getRepository(Empresa).findOne(emp.Cuit);
+    public async updateEmpresa(emp: Empresa){
+        const empresa = await Empresa.findOne(emp.Cuit);
         
-    //     if (empresa === undefined) {
-    //         throw { status: 404, message: 'Empresa not found' };            
+        if (empresa === undefined) {
+            throw { status: 404, message: 'Empresa not found' };            
             
-    //     }
-    //     const result = getRepository(Empresa).merge(empresa, emp);
-    //     await getRepository(Empresa).save(result);
+        }
+        const result = await Empresa.merge(empresa, emp);
+        await Empresa.save(result);
     
-    // }
+    }
 
-    // public async deleteEmpresa(cuit: any){
-    //     const emp = await getRepository(Empresa).delete(cuit);
-    //     if(emp.affected === null){
-    //         throw { status: 404, message: 'Empresa not found' };
-    //     }
-    // }
+    public async deleteEmpresa(cuit: any){
+        const emp = await Empresa.delete(cuit);
+        if(emp.affected === null){
+            throw { status: 404, message: 'Empresa not found' };
+        }
+    }
 }

@@ -51,8 +51,80 @@ var EmpresaRepository = /** @class */ (function () {
                     case 0: return [4 /*yield*/, Empresa_1.Empresa.find()];
                     case 1:
                         companies = _a.sent();
-                        console.dir(companies);
                         return [2 /*return*/, companies];
+                }
+            });
+        });
+    };
+    EmpresaRepository.prototype.getEmpresa = function (cuit) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Empresa_1.Empresa.findOne(cuit)];
+                    case 1:
+                        result = _a.sent();
+                        if (result === undefined) {
+                            throw { status: 404, message: 'Empresa wasnt create' };
+                        }
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    EmpresaRepository.prototype.createEmpresa = function (emp) {
+        return __awaiter(this, void 0, void 0, function () {
+            var empresa, InsertedEmpresa;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Empresa_1.Empresa.create(emp)];
+                    case 1:
+                        empresa = _a.sent();
+                        return [4 /*yield*/, Empresa_1.Empresa.save(empresa)];
+                    case 2:
+                        InsertedEmpresa = _a.sent();
+                        if (InsertedEmpresa == undefined) {
+                            throw { status: 404, message: 'Empresa not found' };
+                        }
+                        return [2 /*return*/, InsertedEmpresa];
+                }
+            });
+        });
+    };
+    EmpresaRepository.prototype.updateEmpresa = function (emp) {
+        return __awaiter(this, void 0, void 0, function () {
+            var empresa, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Empresa_1.Empresa.findOne(emp.Cuit)];
+                    case 1:
+                        empresa = _a.sent();
+                        if (empresa === undefined) {
+                            throw { status: 404, message: 'Empresa not found' };
+                        }
+                        return [4 /*yield*/, Empresa_1.Empresa.merge(empresa, emp)];
+                    case 2:
+                        result = _a.sent();
+                        return [4 /*yield*/, Empresa_1.Empresa.save(result)];
+                    case 3:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    EmpresaRepository.prototype.deleteEmpresa = function (cuit) {
+        return __awaiter(this, void 0, void 0, function () {
+            var emp;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Empresa_1.Empresa.delete(cuit)];
+                    case 1:
+                        emp = _a.sent();
+                        if (emp.affected === null) {
+                            throw { status: 404, message: 'Empresa not found' };
+                        }
+                        return [2 /*return*/];
                 }
             });
         });

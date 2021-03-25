@@ -26,6 +26,10 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 app.get('/empresa', empresaController.getAll);
+app.get('/empresa/:cuit', empresaController.getOne);
+app.post('/empresa', empresaController.create);
+app.put('/empresa/:id', empresaController.update);
+app.delete('/empresa/:cuit', empresaController.delete);
 
 app.listen(3000);
 console.log('Server on port', 3000);

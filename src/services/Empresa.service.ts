@@ -8,29 +8,28 @@ export class EmpresaService{
         
     }
 
-    public async getAll(){
-        debugger;
+    public async getAll(){        
         return await this.repo.getEmpresas();
 
     }
 
-    // public async getOne(id: any){
-    //     return await this.repo.getEmpresa(id);
+    public async getOne(id: any){
+        return await this.repo.getEmpresa(id);
 
-    // }
+    }
 
-    // public async create(body: Empresa){
-    //     return await this.repo.createEmpresa(body);
+    public async create(body: Empresa){
+        return await this.repo.createEmpresa(body);
 
-    // }
+    }
 
-    // public async update(body: Empresa){
-    //     return await this.repo.updateEmpresa(body);
+    public async update(body: Empresa){
+        return await this.repo.updateEmpresa(body);
 
-    // }
+    }
 
-    // public async delete(id: any){
-    //     return await this.repo.deleteEmpresa(id);
-    // }
+    public async delete(id: any){
+        return await this.repo.deleteEmpresa(id);
+    }
 
 }

@@ -41,10 +41,10 @@ var EmpresaController = /** @class */ (function () {
     function EmpresaController(empresaService) {
         this.empresaService = empresaService;
         this.getAll = this.getAll.bind(this);
-        // this.getOne = this.getOne.bind(this);
-        // this.create = this.create.bind(this);
-        // this.update = this.update.bind(this);
-        // this.delete = this.delete.bind(this);
+        this.getOne = this.getOne.bind(this);
+        this.create = this.create.bind(this);
+        this.update = this.update.bind(this);
+        this.delete = this.delete.bind(this);
     }
     EmpresaController.prototype.getAll = function (req, res, next) {
         var _this = this;
@@ -56,6 +56,50 @@ var EmpresaController = /** @class */ (function () {
                     case 1:
                         emp = _a.sent();
                         return [2 /*return*/, res.json(emp)];
+                }
+            });
+        }); })().catch(next);
+    };
+    EmpresaController.prototype.getOne = function (req, res, next) {
+        var _this = this;
+        (function () { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.empresaService.getOne(req.params.Cuit)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); })().catch(next);
+    };
+    EmpresaController.prototype.create = function (req, res, next) {
+        var _this = this;
+        (function () { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.empresaService.create(req.body)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); })().catch(next);
+    };
+    EmpresaController.prototype.update = function (req, res, next) {
+        var _this = this;
+        (function () { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.empresaService.update(req.body)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); })().catch(next);
+    };
+    EmpresaController.prototype.delete = function (req, res, next) {
+        var _this = this;
+        (function () { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.empresaService.delete(req.params.Cuit)];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         }); })().catch(next);
